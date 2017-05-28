@@ -1,0 +1,12 @@
+{% import "macros.html" as macros %}
+{% extends "base.html" %}
+{% block content %}
+
+{{ macros.render_entry(entry) }}
+
+<section class="confirm">
+  <a class="confirm-delete" href="/entry/{{ entry.id - 1 }}/delete"><span class="fa fa-trash"></span>&nbsp;Delete&nbsp;</a>
+  <a class="confirm-cancel" href="{{ url_for('entries') }}")><span class="fa fa-ban"></span>&nbsp;Cancel&nbsp;</a>
+</section>
+
+{% endblock %}

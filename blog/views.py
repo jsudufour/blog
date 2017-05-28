@@ -80,3 +80,25 @@ def edit_entry_post(id):
     session.add(entry)
     session.commit()
     return redirect(url_for("entries"))
+
+@app.route("/entry/<id>/confirm-delete", methods=["GET"])
+def delete_entry_confirm(id):
+    entryid = int(id) + 1
+    entries = session.query(Entry)
+    for entry in entries:
+        if str(entry.id) == str(entryid):
+            entry=entry
+            break
+    return render_template("delete_entry.html", entry=entry)
+
+@app.route("/entry/<id>/delete", methods=["GET", "DELETE"])
+def delete_entry_post(id):
+    entryid = int(id) + 1
+    entries = session.query(Entry)
+    for entry in entries:
+        if str(entry.id) == str(entryid):
+            entry=entry
+            break
+    session.delete(entry)
+    session.commit()
+    return redirect(url_for("entries"))

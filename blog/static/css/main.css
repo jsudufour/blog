@@ -1,4 +1,15 @@
 div.metadata {
     margin-top: 20px;
     font-size: 1.5em;
+    font-family: sans-serif;
+}
+
+.confirm {
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.confirm-delete, .confirm-cancel {
+  color: #de1348;
+  font-family: sans-serif;
 }
