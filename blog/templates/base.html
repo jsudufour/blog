@@ -35,6 +35,19 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                      <div class="dropdown entries-per-page">
+                        <form name="entries-per-page" method='GET'>
+                        Items per page:&nbsp;
+                        <select name="limit">
+                          <option value="default"></option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                        <button type="submit" href="/?limit={{ request.args.get('limit', default=10) }}">Go</button>
+                      </form>
+                      </div>
                     </ul>
                 </div>
             </div>

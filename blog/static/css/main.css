@@ -1,7 +1,11 @@
 div.metadata {
     margin-top: 20px;
     font-size: 1.5em;
-    font-family: sans-serif;
+}
+
+.dropdown {
+  margin-top: 20px;
+  color: #999999;
 }
 
 .confirm {
