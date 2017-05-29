@@ -9,7 +9,8 @@ PAGINATE_BY = 10
 @app.route("/")
 @app.route("/page/<int:page>")
 def entries(page=1):
-    limit = PAGINATE_BY
+
+    limit = int(request.args.get('limit', PAGINATE_BY))
 
     # Zero-indexed page
     page_index = page - 1
