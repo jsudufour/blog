@@ -72,6 +72,7 @@ def view_entry(id):
     return render_template("view_entry.html", entry=entry)
 
 @app.route("/entry/<id>/edit", methods=["GET"])
+@login_required
 def edit_entry_get(id):
     entryid = int(id) + 1
     entries = session.query(Entry)
@@ -82,6 +83,7 @@ def edit_entry_get(id):
     return render_template("edit_entry.html", entry=entry)
 
 @app.route("/entry/<id>/edit", methods=["POST"])
+@login_required
 def edit_entry_post(id):
     entryid = int(id) + 1
     entries = session.query(Entry)
@@ -96,6 +98,7 @@ def edit_entry_post(id):
     return redirect(url_for("entries"))
 
 @app.route("/entry/<id>/confirm-delete", methods=["GET"])
+@login_required
 def delete_entry_confirm(id):
     entryid = int(id) + 1
     entries = session.query(Entry)
@@ -106,6 +109,7 @@ def delete_entry_confirm(id):
     return render_template("delete_entry.html", entry=entry)
 
 @app.route("/entry/<id>/delete", methods=["GET", "DELETE"])
+@login_required
 def delete_entry_post(id):
     entryid = int(id) + 1
     entries = session.query(Entry)
