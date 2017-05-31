@@ -35,11 +35,22 @@ def adduser():
         return
 
     password = ""
-    while len(password) < 8 or password != password_2:
-        password = getpass("Password: ")
-        password_2 = getpass("Re-enter password: ")
-    user = User(name=name, email=email,
-                password=generate_password_hash(password))
+    password = getpass("Password: ")
+    password_2 = getpass("Re-enter password: ")
+    valid = False
+    while not valid:
+        if len(password) < 8:
+            print("Password too short.")
+            password = getpass("Password: ")
+            password_2 = getpass("Re-enter password: ")
+        elif password != password_2:
+            print("Passwords do not match.")
+            password = getpass("Password: ")
+            password_2 = getpass("Re-enter password: ")
+        else:
+            valid = True
+            user = User(name=name, email=email,
+                    password=generate_password_hash(password))
     session.add(user)
     session.commit()
 
