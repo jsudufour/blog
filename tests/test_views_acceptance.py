@@ -17,6 +17,7 @@ class TestViews(unittest.TestCase):
     def setUp(self):
         """ Test setup """
         self.browser = Browser('chrome')
+        # self.browser = Browser("phantomjs")
 
         # Set up the tables in the database
         Base.metadata.create_all(engine)
@@ -38,7 +39,7 @@ class TestViews(unittest.TestCase):
         self.browser.fill("password", "test")
         button = self.browser.find_by_css("button[type=submit]")
         button.click()
-        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/login?limit=10")
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080")
 
     def test_login_incorrect(self):
         self.browser.visit("http://127.0.0.1:8080/login")
@@ -46,7 +47,7 @@ class TestViews(unittest.TestCase):
         self.browser.fill("password", "test")
         button = self.browser.find_by_css("button[type=submit]")
         button.click()
-        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/login?limit=10")
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/login")
 
     def tearDown(self):
         """ Test teardown """
