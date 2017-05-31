@@ -22,7 +22,7 @@ div.metadata {
   margin-top: 18px;
 }*/
 
-.login, .logout{
+.login, .logout {
   color: #999999;
   font-size: 1.2em;
   text-decoration: none;
@@ -32,4 +32,9 @@ div.metadata {
 .login:hover, .logout:hover {
   color: white;
   text-decoration: none;
+}
+
+.add-entry {
+  font-size: 1.2em;
+  margin-left: 35px;
 }

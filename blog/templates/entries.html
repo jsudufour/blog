@@ -2,6 +2,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="add-entry">
+  {% if current_user.is_authenticated %} <a class="add-entry" href="{{ url_for('add_entry_get') }}"> Add Entry {% endif %} </a>
+</div>
+
 {% for entry in entries %}
 {{ macros.render_entry(entry) }}
 {% endfor %}
