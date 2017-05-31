@@ -44,7 +44,7 @@
                           <option value="50">50</option>
                           <option value="100">100</option>
                         </select>
-                        <button type="submit">Go</button>
+                        <button type="submit">Go</button> {% if not current_user.is_authenticated %} <a class="login" href="{{ url_for('login_get') }}"> Login {% endif %}{% if current_user.is_authenticated %} <a class="logout" href="{{ url_for('logout') }}"> Logout {% endif %} </a>
                       </form>
                       </div>
                     </ul>

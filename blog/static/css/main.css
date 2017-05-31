@@ -17,3 +17,19 @@ div.metadata {
   color: #de1348;
   font-family: sans-serif;
 }
+
+/*.navbar-nav {
+  margin-top: 18px;
+}*/
+
+.login, .logout{
+  color: #999999;
+  font-size: 1.2em;
+  text-decoration: none;
+  padding-top: : 10px;
+}
+
+.login:hover, .logout:hover {
+  color: white;
+  text-decoration: none;
+}
