@@ -1,6 +1,7 @@
 {% macro render_entry(entry) %}
 <div class="row">
     <div class="col-md-2 text-right metadata">
+      {{ entry.author.name }} &nbsp;
       <a class="edit" href="/entry/{{ entry.id - 1 }}/edit"><span class="fa fa-pencil">&nbsp; &nbsp;</span></a>
       <a class="delete" href="/entry/{{ entry.id - 1 }}/confirm-delete"><span class="fa fa-trash"></span>&nbsp; &nbsp;</a>
         <ul class="list-unstyled">
