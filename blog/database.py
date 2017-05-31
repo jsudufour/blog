@@ -18,6 +18,7 @@ class Entry(Base):
     title = Column(String(1024))
     content = Column(Text)
     datetime = Column(DateTime, default=datetime.datetime.now)
+    author_id = Column(Integer, ForeignKey('users.id'))
 
 class User(Base, UserMixin):
     __tablename__ = "users"
@@ -26,5 +27,6 @@ class User(Base, UserMixin):
     name = Column(String(128))
     email = Column(String(128), unique=True)
     password = Column(String(128))
+    entries = relationship("Entry", backref="author")
 
 Base.metadata.create_all(engine)
