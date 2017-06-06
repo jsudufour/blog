@@ -18,9 +18,9 @@ div.metadata {
   font-family: sans-serif;
 }
 
-/*.navbar-nav {
-  margin-top: 18px;
-}*/
+.entries-per-page {
+  text-align: right;
+}
 
 .login, .logout {
   color: #999999;
