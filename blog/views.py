@@ -132,13 +132,13 @@ def login_post():
     user = session.query(User).filter_by(email=email).first()
     if not user or not check_password_hash(user.password, password):
         flash("Incorrect username or password", "danger")
-        return redirect(url_for("login_get"))
+        return redirect(url_for('login_get'))
 
     login_user(user)
-    return redirect(request.args.get('next') or url_for("entries"))
+    return redirect(request.args.get('next') or url_for('entries'))
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("entries"))
+    return redirect(url_for('entries'))

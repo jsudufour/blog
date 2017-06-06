@@ -23,7 +23,7 @@ class TestViews(unittest.TestCase):
         Base.metadata.create_all(engine)
 
         # Create an example user
-        self.user = User(name="Sophie", email="shopie@example.com",
+        self.user = User(name="Mary", email="mary@example.com",
                          password=generate_password_hash("test"))
         session.add(self.user)
         session.commit()
@@ -35,19 +35,32 @@ class TestViews(unittest.TestCase):
 
     def test_login_correct(self):
         self.browser.visit("http://127.0.0.1:8080/login")
-        self.browser.fill("email", "alice@example.com")
+        self.browser.fill("email", "mary@example.com")
         self.browser.fill("password", "test")
-        button = self.browser.find_by_css("button[type=submit]")
+        button = self.browser.find_by_css("#login-submit")
         button.click()
-        self.assertEqual(self.browser.url, "http://127.0.0.1:8080")
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/")
 
     def test_login_incorrect(self):
         self.browser.visit("http://127.0.0.1:8080/login")
         self.browser.fill("email", "bob@example.com")
         self.browser.fill("password", "test")
-        button = self.browser.find_by_css("button[type=submit]")
+        button = self.browser.find_by_css("#login-submit")
         button.click()
         self.assertEqual(self.browser.url, "http://127.0.0.1:8080/login")
+
+    def test_entry_add(self):
+        self.browser.visit("http://127.0.0.1:8080/login")
+        self.browser.fill("email", "mary@example.com")
+        self.browser.fill("password", "test")
+        button = self.browser.find_by_css("#login-submit")
+        button.click()
+        self.browser.visit("http://127.0.0.1:8080/entry/add")
+        self.browser.fill_form({"title": "TestTitle"})
+        self.browser.fill_form({"content": "TestContent"})
+        button = self.browser.find_by_css("button[type=submit]")
+        button.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/")
 
     def tearDown(self):
         """ Test teardown """

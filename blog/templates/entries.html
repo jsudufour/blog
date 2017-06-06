@@ -1,5 +1,22 @@
 {% import "macros.html" as macros %}
 {% extends "base.html" %}
+
+{% block nav %}
+<div class="dropdown entries-per-page">
+  <form name="entries-per-page">
+    Items per page:&nbsp;
+    <select name="limit">
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    <button type="submit">Go</button>
+  </form>
+</div>
+
+{% endblock %}
+
 {% block content %}
 
 <div class="add-entry">
