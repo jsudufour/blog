@@ -11,7 +11,7 @@ from splinter import Browser
 os.environ["CONFIG_PATH"] = "blog.config.TestingConfig"
 
 from blog import app
-from blog.database import Base, engine, session, User
+from blog.database import Base, engine, session, User, Entry
 
 class TestViews(unittest.TestCase):
     def setUp(self):
@@ -61,6 +61,60 @@ class TestViews(unittest.TestCase):
         button = self.browser.find_by_css("button[type=submit]")
         button.click()
         self.assertEqual(self.browser.url, "http://127.0.0.1:8080/")
+
+    def test_edit_entry(self):
+        session.add(Entry(title="test",content="Testing"))
+        session.commit()
+        self.browser.visit("http://127.0.0.1:8080/login")
+        self.browser.fill("email", "mary@example.com")
+        self.browser.fill("password", "test")
+        button = self.browser.find_by_css("#login-submit")
+        button.click()
+        link = self.browser.find_link_by_partial_href("/edit")[0]
+        link.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/entry/0/edit")
+
+    def test_delete_entry_cancel(self):
+        session.add(Entry(title="test",content="Testing"))
+        session.commit()
+        self.browser.visit("http://127.0.0.1:8080/login")
+        self.browser.fill("email", "mary@example.com")
+        self.browser.fill("password", "test")
+        button = self.browser.find_by_css("#login-submit")
+        button.click()
+        link = self.browser.find_link_by_partial_href("/confirm-delete")[0]
+        link.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/entry/0/confirm-delete")
+        link = self.browser.find_link_by_partial_href("/")[0]
+        link.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/")
+
+    def test_delete_entry_delete(self):
+        session.add(Entry(title="test",content="Testing"))
+        session.commit()
+        self.browser.visit("http://127.0.0.1:8080/login")
+        self.browser.fill("email", "mary@example.com")
+        self.browser.fill("password", "test")
+        button = self.browser.find_by_css("#login-submit")
+        button.click()
+        link = self.browser.find_link_by_partial_href("/confirm-delete")[0]
+        link.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/entry/0/confirm-delete")
+        link = self.browser.find_link_by_partial_href("/delete")[0]
+        link.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/")
+
+    def test_view_single_entry(self):
+        session.add(Entry(title="test",content="Testing"))
+        session.commit()
+        self.browser.visit("http://127.0.0.1:8080/login")
+        self.browser.fill("email", "mary@example.com")
+        self.browser.fill("password", "test")
+        button = self.browser.find_by_css("#login-submit")
+        button.click()
+        link = self.browser.find_link_by_href("/entry/0")[0]
+        link.click()
+        self.assertEqual(self.browser.url, "http://127.0.0.1:8080/entry/0")
 
     def tearDown(self):
         """ Test teardown """
