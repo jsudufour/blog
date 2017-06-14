@@ -6,4 +6,3 @@ flask-migrate
 mistune
 psycopg2
 splinter
-selenium
